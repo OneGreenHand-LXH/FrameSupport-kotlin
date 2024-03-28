@@ -1,0 +1,28 @@
+apply from: 'version.gradle'
+
+buildscript {
+    repositories {
+        jcenter()
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.1.2'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0'//kotlin
+        classpath 'com.blankj:bus-gradle-plugin:2.6'//BusUtils
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/example_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="网络请求示例一: 无数据空布局显示"
+        android:textColor="@color/c_FFFFFF" />
+
+    <TextView
+        android:id="@+id/example_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/c_999999"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="网络请求示例二: 添加头部和底部"
+        android:textColor="@color/c_FFFFFF" />
+
+    <TextView
+        android:id="@+id/example_three"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/c_FF0000"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="网络请求示例三: 下拉刷新和上拉加载"
+        android:textColor="@color/c_FFFFFF" />
+</LinearLayout>

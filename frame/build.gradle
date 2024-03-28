@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: "com.blankj.bus"//BusUtils
+android {
+    def version = rootProject.ext.versions
+    compileSdkVersion versions.compileSdkVersion
+    buildToolsVersion versions.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion version.minSdkVersion
+        targetSdkVersion version.targetSdkVersion
+        versionCode version.versionCode
+        versionName version.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    def dependencies = rootProject.ext.deps
+    // Support libraries
+    api dependencies.suport.gson
+    api dependencies.suport.appcompat
+    api dependencies.suport.design
+    api dependencies.suport.swiperefreshlayout
+    api dependencies.suport.viewbinding
+    api dependencies.suport.recyclerview
+    //okhttp日志
+    implementation dependencies.okhttp_logging
+    //retrofit2
+    api dependencies.retrofit2.retrofit
+    api dependencies.retrofit2.adapter_rxjava3
+    api dependencies.retrofit2.converter_gson
+    //autoDispose(RxJava)
+    api dependencies.autodispose
+    api dependencies.rxandroid
+    //RecyclerViewAdapter
+    api dependencies.RecyclerViewAdapter
+    //工具类
+    api dependencies.utilcode
+    //沉浸式状态栏(activity)
+    api dependencies.immersionbar
+}

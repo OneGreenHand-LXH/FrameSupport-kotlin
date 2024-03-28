@@ -1,0 +1,37 @@
+{
+  "defaultExtraInfo": {
+    "CHANNEL": "MeiZu"
+  },
+  "channelInfoList": [
+    {
+      "channel": "MeiZu",
+      "extraInfo": {
+        "CHANNEL": "MeiZu"
+      }
+    },
+    {
+      "channel": "XiaoMi",
+      "extraInfo": {
+        "CHANNEL": "XiaoMi"
+      }
+    },
+    {
+      "channel": "HuaWei",
+      "extraInfo": {
+        "CHANNEL": "HuaWei"
+      }
+    },
+    {
+      "channel": "OPPO",
+      "extraInfo": {
+        "CHANNEL": "OPPO"
+      }
+    },
+    {
+      "channel": "VIVO",
+      "extraInfo": {
+        "CHANNEL": "VIVO"
+      }
+    }
+  ]
+}

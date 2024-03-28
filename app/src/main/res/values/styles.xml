@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--解决启动白屏问题-->
+    <style name="StartPage" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+    </style>
+    <!--CheckBox样式-->
+    <style name="Common_Check_Box_Style" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/c_DADADA</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+    <!--解决微信支付回调页面闪动问题-->
+    <style name="wx_theme" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+    <!-- 横线-->
+    <style name="DividerX">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.7dp</item>
+        <item name="android:background">@color/c_DADADA</item>
+    </style>
+    <!-- 竖线 -->
+    <style name="DividerY">
+        <item name="android:layout_width">0.7dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/c_DADADA</item>
+    </style>
+
+    <style name="EditText">
+        <item name="android:textCursorDrawable">@drawable/shape_input_cursor</item>
+        <item name="android:background">@null</item>
+        <!-- 适配RTL -->
+        <item name="android:textDirection">locale</item>
+    </style>
+
+</resources>

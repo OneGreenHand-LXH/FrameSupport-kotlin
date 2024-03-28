@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--圆形头像-->
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_circle_background_color" format="color" />
+    </declare-styleable>
+    <!--圆形圆角ImageView-->
+    <declare-styleable name="RoundedImageView">
+        <attr name="riv_corner_radius" format="dimension" />
+        <attr name="riv_corner_radius_top_left" format="dimension" />
+        <attr name="riv_corner_radius_top_right" format="dimension" />
+        <attr name="riv_corner_radius_bottom_left" format="dimension" />
+        <attr name="riv_corner_radius_bottom_right" format="dimension" />
+        <attr name="riv_border_width" format="dimension" />
+        <attr name="riv_border_color" format="color" />
+        <attr name="riv_mutate_background" format="boolean" />
+        <attr name="riv_oval" format="boolean" />
+        <attr name="riv_scaleType">
+            <enum name="matrix" value="0" />
+            <enum name="fitXY" value="1" />
+            <enum name="fitStart" value="2" />
+            <enum name="fitCenter" value="3" />
+            <enum name="fitEnd" value="4" />
+            <enum name="center" value="5" />
+            <enum name="centerCrop" value="6" />
+            <enum name="centerInside" value="7" />
+        </attr>
+        <attr name="riv_tile_mode">
+            <enum name="clamp" value="0" />
+            <enum name="repeat" value="1" />
+            <enum name="mirror" value="2" />
+        </attr>
+        <attr name="riv_tile_mode_x">
+            <enum name="clamp" value="0" />
+            <enum name="repeat" value="1" />
+            <enum name="mirror" value="2" />
+        </attr>
+        <attr name="riv_tile_mode_y">
+            <enum name="clamp" value="0" />
+            <enum name="repeat" value="1" />
+            <enum name="mirror" value="2" />
+        </attr>
+    </declare-styleable>
+    <!--下载进度条-->
+    <declare-styleable name="AnimDownloadProgressButton">
+        <attr name="progressbtn_radius" format="float" />
+        <attr name="progressbtn_background_color" format="reference|color" />
+        <attr name="progressbtn_background_second_color" format="reference|color" />
+        <attr name="progressbtn_text" format="reference|string" />
+        <attr name="progressbtn_text_size" format="float" />
+        <attr name="progressbtn_text_color" format="reference|color" />
+        <attr name="progressbtn_text_covercolor" format="reference|color" />
+    </declare-styleable>
+    <!--验证码倒计时-->
+    <declare-styleable name="VerificationCode">
+        <attr name="VcConductColor" format="reference|color" />
+        <attr name="VcEndColor" format="reference|color" />
+        <attr name="VcEndText" format="reference|string" />
+        <attr name="VcCompany" format="reference|string" />
+        <attr name="VcDuration" format="integer" />
+        <attr name="VcIntervalTime" format="integer" />
+    </declare-styleable>
+    <!--通用标题栏-->
+    <declare-styleable name="TitleBarLayout">
+        <attr name="TblBackgroundColor" format="reference|color" />
+        <attr name="TblText" format="reference|string" />
+        <attr name="TblTextColor" format="reference|color" />
+        <attr name="TblRTextShow" format="boolean" />
+        <attr name="TblRText" format="reference|string" />
+        <attr name="TblRTextColor" format="reference|color" />
+        <attr name="TblBackShow" format="boolean" />
+        <attr name="TblBackImage" format="reference" />
+    </declare-styleable>
+    <!--TabLayout 解决英文默认大写问题-->
+    <style name="TabLayoutTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+</resources>

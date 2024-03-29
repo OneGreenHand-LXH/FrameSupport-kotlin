@@ -20,7 +20,7 @@ ext {
             utilcode           : "1.31.1",
             immersionbar       : "3.2.2",
             walle              : "1.1.7",
-            autodispose        : "2.2.1",
+            autodispose        : "2.1.1",
             rxandroid          : "3.0.2",
             RecyclerViewAdapter: "3.0.14",
     ]

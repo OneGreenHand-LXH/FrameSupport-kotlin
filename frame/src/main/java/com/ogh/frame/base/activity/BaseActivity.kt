@@ -15,6 +15,7 @@ import com.blankj.utilcode.util.KeyboardUtils
 import com.ogh.frame.R
 import com.gyf.immersionbar.ImmersionBar
 import com.ogh.frame.base.BaseView
+import com.ogh.frame.util.NotificationControlManager
 import com.ogh.frame.view.LoadingDialog
 import java.lang.reflect.ParameterizedType
 
@@ -148,6 +149,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity(), BaseView {
             mIsDestroyed = true
             dismissLoadingDialog()
             if (isRegisterBus()) BusUtils.unregister(this)
+            NotificationControlManager.getInstance()?.dismissDialog()
         }
     }
 }

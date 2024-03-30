@@ -35,4 +35,24 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+    <!--全局通知弹窗-->
+    <style name="DialogNotificationTop">
+        <item name="android:windowIsTranslucent">true</item>
+        <!--设置背景透明-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--设置dialog浮与activity上面-->
+        <item name="android:windowIsFloating">true</item>
+        <!--去掉背景模糊效果-->
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--去掉边框-->
+        <item name="android:windowFrame">@null</item>
+    </style>
+    <!--全局通知弹窗动画-->
+    <style name="DialogNotificationAnimation" parent="@android:style/Animation.Dialog">
+        <!-- 进入时的动画 -->
+        <item name="android:windowEnterAnimation">@anim/dialog_notification_enter</item>
+        <!-- 退出时的动画 -->
+        <item name="android:windowExitAnimation">@anim/dialog_notification_exit</item>
+    </style>
 </resources>

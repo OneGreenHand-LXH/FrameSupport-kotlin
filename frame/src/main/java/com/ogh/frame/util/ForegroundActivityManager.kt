@@ -11,11 +11,17 @@ class ForegroundActivityManager {
     private var currentActivityWeakRef: WeakReference<Activity>? = null
 
     companion object {
-        private val instance = ForegroundActivityManager()
+        private var instance: ForegroundActivityManager? = null
 
         @JvmStatic
         fun getInstance(): ForegroundActivityManager {
-            return instance
+            if (instance == null) {
+                synchronized(ForegroundActivityManager::class.java) {
+                    if (instance == null)
+                        instance = ForegroundActivityManager()
+                }
+            }
+            return instance!!
         }
     }
 
@@ -26,8 +32,9 @@ class ForegroundActivityManager {
         return currentActivity
     }
 
-    fun setCurrentActivity(activity: Activity) {
-        currentActivityWeakRef = WeakReference(activity)
+    fun setCurrentActivity(activity: Activity?) {
+        if (null != activity)
+            currentActivityWeakRef = WeakReference(activity)
     }
 
 }

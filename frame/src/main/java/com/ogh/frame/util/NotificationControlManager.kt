@@ -1,9 +1,6 @@
 package com.ogh.frame.util
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -35,8 +32,6 @@ class NotificationControlManager {
     private var dialog: NotificationDialog? = null
 
     companion object {
-        const val channelId = "NotificationService"
-        const val description = "通知消息"
 
         @Volatile
         private var sInstance: NotificationControlManager? = null
@@ -57,10 +52,8 @@ class NotificationControlManager {
      * 是否打开通知
      */
     fun isOpenNotification(): Boolean {
-        val currentActivity =
-            ForegroundActivityManager.getInstance().getCurrentActivity() ?: return false
-        val notificationManager: NotificationManagerCompat =
-            NotificationManagerCompat.from(currentActivity)
+        val currentActivity = ForegroundActivityManager.getInstance().getCurrentActivity() ?: return false
+        val notificationManager: NotificationManagerCompat = NotificationManagerCompat.from(currentActivity)
         return notificationManager.areNotificationsEnabled()
     }
 
@@ -70,7 +63,7 @@ class NotificationControlManager {
     @RequiresApi(Build.VERSION_CODES.O)
     fun openNotificationInSys() {
         val context = ForegroundActivityManager.getInstance().getCurrentActivity() ?: return
-        val intent: Intent = Intent()
+        val intent = Intent()
         try {
             intent.action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
             //8.0及以后版本使用这两个extra.  >=API 26
@@ -85,7 +78,7 @@ class NotificationControlManager {
             //其他低版本或者异常情况，走该节点。进入APP设置界面
             intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
             intent.putExtra("package", context.packageName)
-            //val uri = Uri.fromParts("package", packageName, null)
+            //val uri = Uri.fromParts("package", context.packageName, null)
             //intent.data = uri
             context.startActivity(intent)
         }
@@ -95,40 +88,38 @@ class NotificationControlManager {
      * 发通知
      * @param title 标题
      * @param content 内容
-     * @param cls 通知点击后跳转的Activity,默认为null跳转到MainActivity
+     * @param cls 通知点击后跳转的Activity
      */
-    fun notify(title: String, content: String, cls: Class<*>) {
+    fun <B : Activity> notify(title: String, content: String, cls: Class<B>?) {
         val context = ForegroundActivityManager.getInstance().getCurrentActivity() ?: return
-        val notificationManager =
-            context.getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager = context.getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager
         val builder: Notification.Builder
-        val intent = Intent(context, cls)
-        val pendingIntent: PendingIntent? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-        } else
-            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        var pendingIntent: PendingIntent? = null
+        if (null != cls) {
+            val intent = Intent(context, cls)
+            pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+            } else PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notificationChannel =
-                NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
-            notificationChannel.enableLights(true);
-            notificationChannel.lightColor = Color.RED;
-            notificationChannel.enableVibration(true);
-            notificationChannel.vibrationPattern =
-                longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
+            val channelId = "NotificationService"
+            val description = "通知消息"
+            val notificationChannel = NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
+            notificationChannel.enableLights(true)
+            notificationChannel.lightColor = Color.RED
+            notificationChannel.enableVibration(true)
+            val vibrationPattern = longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
+            notificationChannel.vibrationPattern = vibrationPattern
             notificationManager.createNotificationChannel(notificationChannel)
             builder = Notification.Builder(context, channelId)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentIntent(pendingIntent)
-                .setContentTitle(title)
-                .setContentText(content)
         } else {
             builder = Notification.Builder(context)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.mipmap.ic_launcher))
-                .setContentIntent(pendingIntent)
-                .setContentTitle(title)
-                .setContentText(content)
+            builder.setLargeIcon(BitmapFactory.decodeResource(context.resources, R.mipmap.ic_launcher))
         }
+        if (null != pendingIntent) builder.setContentIntent(pendingIntent)
+        builder.setSmallIcon(R.mipmap.ic_launcher)
+        builder.setContentTitle(title)
+        builder.setContentText(content)
         notificationManager.notify(autoIncrement.incrementAndGet(), builder.build())
     }
 
@@ -138,11 +129,7 @@ class NotificationControlManager {
      * @param content 内容
      * @param listener 点击的回调
      */
-    fun showNotificationDialog(
-        title: String,
-        content: String,
-        listener: OnNotificationCallback? = null
-    ) {
+    fun showNotificationDialog(title: String, content: String, listener: OnNotificationCallback? = null) {
         val activity = ForegroundActivityManager.getInstance().getCurrentActivity() ?: return
         dialog = NotificationDialog(activity, title, content)
         if (Thread.currentThread() != Looper.getMainLooper().thread) {   //子线程

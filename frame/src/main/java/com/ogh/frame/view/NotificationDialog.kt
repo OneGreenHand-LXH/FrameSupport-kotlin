@@ -18,7 +18,7 @@ class NotificationDialog(context: Context, var title: String, var content: Strin
     private var mListener: OnNotificationClick? = null
     private var mStartY: Float = 0F
     private var mView: View? = null
-    private var mHeight: Int? = 0
+    private var mHeight: Int = 0
 
     init {
         mView = LayoutInflater.from(context).inflate(R.layout.common_layout_notifacation, null)
@@ -58,7 +58,7 @@ class NotificationDialog(context: Context, var title: String, var content: Strin
             MotionEvent.ACTION_UP -> {
                 if (mStartY > 0) {
                     val moveY = event.y
-                    if (mStartY - moveY >= hasViewHalfHeight(mHeight)) {//滑动超过控件的一半认定为滑动事件
+                    if (mStartY - moveY >= getViewHalfHeight()) {//滑动超过控件的一半认定为滑动事件
                         dismiss()
                     } else if (mStartY == moveY && isOutOfBounds(event)) {//认定为点击事件
                         mListener?.onClick()
@@ -75,20 +75,18 @@ class NotificationDialog(context: Context, var title: String, var content: Strin
      */
     private fun isOutOfBounds(event: MotionEvent): Boolean {
         val yValue = event.y
-        if (yValue > 0 && yValue <= (mHeight ?: (0 + 40)))
-            return true
-        return false
+        return yValue > 0 && yValue <= if (mHeight == 0) 50 else mHeight
     }
 
     /**
      * 是否有控件一半的高度
-     * 没有就默认40
+     * 没有就默认50
      */
-    private fun hasViewHalfHeight(height: Int?): Int = if (null == height) 40 else (height / 2)
+    private fun getViewHalfHeight(): Int = if (mHeight == 0) 50 else mHeight / 2
 
     private fun setDialogSize() {
         mView?.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
-            mHeight = v?.height
+            mHeight = v?.height ?: 50
         }
     }
 

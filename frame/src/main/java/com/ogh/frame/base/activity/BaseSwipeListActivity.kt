@@ -22,7 +22,7 @@ import com.ogh.frame.config.BaseConfig
  */
 abstract class BaseSwipeListActivity<T : ViewBinding,P: BasePresenter<*>,B : BaseBean,AB> :BaseSwipeActivity<T,P,B>(),BaseSwipeListView<B>{
 
-    var mRecyclerView: RecyclerView?=null
+    var mRecyclerView: RecyclerView? = null
     lateinit var mBaseAdapter: BaseQuickAdapter<AB, BaseQuickHolder>
     private var page = BaseConfig.ViewPage.START_INDEX
 
@@ -32,6 +32,7 @@ abstract class BaseSwipeListActivity<T : ViewBinding,P: BasePresenter<*>,B : Bas
         if (mRecyclerView == null) throw RuntimeException("布局中必须有RecyclerView,并且RecyclerView中的ID为frame_recycleView")
         mRecyclerView!!.layoutManager = setLayoutManager()
         mBaseAdapter = setAdapter()
+//      getLoadMoreModule().loadMoreView = CustomLoadMoreView()
         getAdapter()
     }
 

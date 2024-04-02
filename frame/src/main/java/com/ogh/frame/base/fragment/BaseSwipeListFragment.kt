@@ -31,6 +31,7 @@ abstract class BaseSwipeListFragment<T : ViewBinding, P : BasePresenter<*>, B : 
         if (mRecyclerView == null) throw RuntimeException("布局中必须有RecyclerView,并且RecyclerView中的ID为frame_recycleView")
         mRecyclerView!!.layoutManager = setLayoutManager()
         mBaseAdapter = setAdapter()
+//      getLoadMoreModule().loadMoreView = CustomLoadMoreView()
         getAdapter()
     }
 

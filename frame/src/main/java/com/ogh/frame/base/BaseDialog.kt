@@ -57,8 +57,8 @@ abstract class BaseDialog : Dialog, LifecycleObserver {
     }
 
     override fun show() {
-        if (mContext is Activity) {
-            val activity = mContext as Activity
+        if (mContext is AppCompatActivity) {
+            val activity = mContext as AppCompatActivity
             if (activity.isFinishing or activity.isDestroyed) return
         }
         super.show()

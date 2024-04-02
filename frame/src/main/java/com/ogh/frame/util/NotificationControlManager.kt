@@ -1,5 +1,6 @@
 package com.ogh.frame.util
 
+import android.annotation.SuppressLint
 import android.app.*
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -90,6 +91,7 @@ class NotificationControlManager {
      * @param content 内容
      * @param cls 通知点击后跳转的Activity
      */
+    @SuppressLint("UnspecifiedImmutableFlag")
     fun <B : Activity> notify(title: String, content: String, cls: Class<B>?) {
         val context = ForegroundActivityManager.getInstance().getCurrentActivity() ?: return
         val notificationManager = context.getSystemService(AppCompatActivity.NOTIFICATION_SERVICE) as NotificationManager

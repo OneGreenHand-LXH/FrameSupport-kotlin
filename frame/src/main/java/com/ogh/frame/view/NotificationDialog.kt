@@ -1,5 +1,6 @@
 package com.ogh.frame.view
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -7,18 +8,32 @@ import android.os.Handler
 import android.os.Looper
 import android.view.*
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import com.ogh.frame.R
 
 /**
  * 通知的自定义Dialog
  */
+@SuppressLint("InflateParams")
 class NotificationDialog(context: Context, var title: String, var content: String) :
-    Dialog(context, R.style.DialogNotificationTop) {
+    Dialog(context, R.style.DialogNotificationTop), LifecycleObserver {
 
-    private var mListener: OnNotificationClick? = null
     private var mStartY: Float = 0F
     private var mView: View? = null
     private var mHeight: Int = 0
+    private var mListener: OnNotificationClick? = null
+
+    //处理通知的点击事件
+    fun setOnNotificationClickListener(listener: OnNotificationClick) {
+        mListener = listener
+    }
+
+    interface OnNotificationClick {
+        fun onClick()
+    }
 
     init {
         mView = LayoutInflater.from(context).inflate(R.layout.common_layout_notifacation, null)
@@ -26,6 +41,11 @@ class NotificationDialog(context: Context, var title: String, var content: Strin
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (context is AppCompatActivity) {
+            val activity = (context as AppCompatActivity)
+            if (!activity.isFinishing and !activity.isDestroyed) //注册绑定生命周期
+                activity.lifecycle.addObserver(this)
+        }
         setContentView(mView!!)
         window?.setGravity(Gravity.TOP)
         val layoutParams = window?.attributes
@@ -115,12 +135,18 @@ class NotificationDialog(context: Context, var title: String, var content: Strin
         }
     }
 
-    //处理通知的点击事件
-    fun setOnNotificationClickListener(listener: OnNotificationClick) {
-        mListener = listener
+    override fun show() {
+        if (context is AppCompatActivity) {
+            val activity = (context as AppCompatActivity)
+            if (activity.isFinishing || activity.isDestroyed)
+                return
+        }
+        super.show()
     }
 
-    interface OnNotificationClick {
-        fun onClick()
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onDestroy() {
+        if (isShowing) dismiss()
     }
+
 }

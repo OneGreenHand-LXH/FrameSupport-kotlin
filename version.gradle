@@ -6,7 +6,7 @@ ext {
             minSdkVersion    : 21,//app最低支持的sdk版本号(Android5.0)
             targetSdkVersion : 31,//兼容targetSdkVersion 31(含)以下版本
 
-            compileSdkVersion: 34,//使用 Android SDK 31版本编译你的应用
+            compileSdkVersion: 34,//使用 Android SDK 34版本编译你的应用
             buildToolsVersion: "34.0.0",//android构建工具的版本
 
             versionCode      : 100010,
@@ -20,7 +20,7 @@ ext {
             utilcode           : "1.31.1",
             immersionbar       : "3.2.2",
             walle              : "1.1.7",
-            autodispose        : "2.1.1",
+            autodispose        : "2.2.1",
             rxandroid          : "3.0.2",
             RecyclerViewAdapter: "3.0.14",
     ]

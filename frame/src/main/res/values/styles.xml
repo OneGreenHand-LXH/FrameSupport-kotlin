@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!--Appbar背景色-->
         <item name="colorPrimary">@color/frame_colorPrimary</item>
@@ -7,10 +8,12 @@
         <item name="colorPrimaryDark">@color/frame_colorPrimary</item>
         <!--控制各个控件被选中时的颜色-->
         <item name="colorAccent">@color/frame_colorPrimary</item>
-        <item name="android:textSize">13dp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/frame_title_name</item>
         <!--页面背景色-->
         <item name="android:windowBackground">@color/frame_white</item>
+        <!-- 去除原生控件获取焦点高亮显示 -->
+        <item name="android:defaultFocusHighlightEnabled" tools:targetApi="o">false</item>
         <!-- 适配RTL -->
         <item name="android:textDirection">locale</item>
     </style>

@@ -2,24 +2,25 @@ apply from: 'version.gradle'
 
 buildscript {
     repositories {
-        jcenter()
         google()
         mavenCentral()
-        maven { url "https://jitpack.io" }
+        maven { url 'https://jitpack.io' }
+        jcenter() {url "https://maven.aliyun.com/repository/jcenter"}
+        maven { url 'https://maven.aliyun.com/repository/google/' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.3.1'
+        classpath 'com.android.tools.build:gradle:8.3.2'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0'//kotlin
-        classpath 'com.blankj:bus-gradle-plugin:2.6'//BusUtils
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
         google()
         mavenCentral()
-        maven { url "https://jitpack.io" }
+        maven { url 'https://jitpack.io' }
+        jcenter() {url "https://maven.aliyun.com/repository/jcenter"}
+        maven { url 'https://maven.aliyun.com/repository/google/' }
     }
 }
 

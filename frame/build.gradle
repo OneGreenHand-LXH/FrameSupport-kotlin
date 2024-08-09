@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'org.jetbrains.kotlin.android'
-apply plugin: "com.blankj.bus"//BusUtils
 android {
     namespace 'com.ogh.frame'
     def version = rootProject.ext.versions
@@ -51,4 +50,6 @@ dependencies {
     api dependencies.utilcode
     //沉浸式状态栏(activity)
     api dependencies.immersionbar
+    //EventBus
+    api dependencies.eventbus
 }

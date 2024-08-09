@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.blankj.utilcode.util.BusUtils
 import com.ogh.frame.R
 import com.ogh.frame.base.BaseView
 import com.ogh.frame.view.LoadingDialog
+import org.greenrobot.eventbus.EventBus
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -41,7 +41,7 @@ abstract class BaseFragment<T :ViewBinding> :Fragment(),BaseView {
         super.onViewCreated(view, savedInstanceState)
         initCommon()
         if (isRegisterBus())
-            BusUtils.register(this)
+            EventBus.getDefault().register(this)
         init(savedInstanceState)
     }
 
@@ -54,7 +54,7 @@ abstract class BaseFragment<T :ViewBinding> :Fragment(),BaseView {
     }
 
     /**
-     * 是否需要注册BusUtils
+     * 是否需要注册EventBus
      */
     open fun isRegisterBus(): Boolean {
         return false
@@ -82,6 +82,6 @@ abstract class BaseFragment<T :ViewBinding> :Fragment(),BaseView {
         super.onDestroy()
         //页面销毁时隐藏dialog，否则重新打开页面时可能会报java.lang.IllegalArgumentException: View not attached to window manager
         dismissLoadingDialog()
-        if (isRegisterBus()) BusUtils.unregister(this)
+        if (isRegisterBus()) EventBus.getDefault().unregister(this)
     }
 }

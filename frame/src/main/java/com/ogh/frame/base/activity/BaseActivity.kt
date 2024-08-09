@@ -10,12 +10,12 @@ import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
-import com.blankj.utilcode.util.BusUtils
 import com.blankj.utilcode.util.KeyboardUtils
 import com.gyf.immersionbar.ImmersionBar
 import com.ogh.frame.R
 import com.ogh.frame.base.BaseView
 import com.ogh.frame.view.LoadingDialog
+import org.greenrobot.eventbus.EventBus
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -44,7 +44,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity(), BaseView {
         init(savedInstanceState) //初始化
         if (isImmersionBarEnabled()) //初始化沉浸式状态栏,所有子类都将继承这些相同的属性,请在设置界面之后设置
             initImmersionBar()
-        if (isRegisterBus()) BusUtils.register(this)
+        if (isRegisterBus()) EventBus.getDefault().register(this)
     }
 
     protected open fun initCommon() {}
@@ -56,7 +56,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity(), BaseView {
     }
 
     /**
-     * 是否需要注册BusUtils
+     * 是否需要注册EventBus
      */
     open fun isRegisterBus(): Boolean {
         return false
@@ -147,7 +147,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity(), BaseView {
         if (!isDestroyed) { // 回收资源
             mIsDestroyed = true
             dismissLoadingDialog()
-            if (isRegisterBus()) BusUtils.unregister(this)
+            if (isRegisterBus()) EventBus.getDefault().unregister(this)
 //            NotificationControlManager.getInstance()?.dismissDialog()//先不用,dialog绑定了生命周期
         }
     }

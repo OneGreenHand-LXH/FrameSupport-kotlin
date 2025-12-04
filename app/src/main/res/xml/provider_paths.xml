@@ -15,14 +15,27 @@
         name="cache"
         path="." />
 
+    <!-- 对应 cache 目录 -->
+    <cache-path
+        name="app_cache"
+        path="." />
+    <!-- 如果需要外部存储，可添加 -->
     <external-path
         name="external"
         path="." />
-
+    <!-- 对应内部存储的 files 目录 (context.getFilesDir()) -->
+    <files-path
+        name="internal_files"
+        path="." />
+    <!-- 对应内部存储的 cache 目录 (context.getCacheDir()) -->
+    <cache-path
+        name="internal_cache"
+        path="." />
+    <!-- 对应外部存储的应用专属文件目录 (context.getExternalFilesDir(null)) -->
     <external-files-path
         name="external_files"
         path="." />
-    <!-- 此标签需要 support-v4:25.0.0以上才可以使用-->
+    <!-- 对应外部存储的应用专属缓存目录 (context.getExternalCacheDir()) -->
     <external-cache-path
         name="external_cache"
         path="." />

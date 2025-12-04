@@ -59,8 +59,8 @@
             android:value="portrait|landscape" />
         <!--设置文件共享-->
         <provider
-            android:name=".MainFileProvider"
-            android:authorities="${applicationId}.fileProvider"
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
